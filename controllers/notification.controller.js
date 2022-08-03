@@ -11,8 +11,8 @@ exports.acceptNotificationRequest = async (req, res) => {
 
 exports.getNotificationDetails = async (req, res) => {
     try {
-        const trackingId = req.params._id
-        const notif = await Notification.findOne({ _id: trackingId })
-        res.status(200).send(Notification)
+        const trackingId = req.params.id
+        const notif = await Notification.findOne({ "_id": trackingId })
+        res.status(200).send(notif)
     } catch (err) { console.log("Error in getNotificationDetails", err.message); return res.status(500).send({ message: "Internal server error" }) }
 }
