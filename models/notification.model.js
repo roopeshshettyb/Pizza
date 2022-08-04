@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const constants = require('../utils/constants')
 
 const notificationSchema = new mongoose.Schema({
     subject: {
@@ -18,8 +19,8 @@ const notificationSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        default: "UN_SENT",
-        enum: ['SENT', 'UN_SENT']
+        default: constants.mailStatus.unsent,
+        enum: [constants.mailStatus.sent, constants.mailStatus.unsent]
     },
     createdAt: {
         type: Date,

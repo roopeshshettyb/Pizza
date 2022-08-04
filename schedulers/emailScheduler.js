@@ -1,9 +1,10 @@
 const cron = require('node-cron')
 const Notification = require('../models/notification.model')
 const emailTransporter = require("../notifiers/emailService");
+const constants = require('../utils/constants')
 
 cron.schedule("*/30 * * * * *", async () => {
-    const notifications = await Notification.find({ status: "UN_SENT" })
+    const notifications = await Notification.find({ status: constants.mailStatus.unsent })
 
     if (notifications) {
         console.log("Unsent are", notifications.length)
@@ -17,7 +18,7 @@ cron.schedule("*/30 * * * * *", async () => {
             emailTransporter.sendMail(mailObj, async (err, info) => {
                 if (err) { console.log("Error", err.message) }
                 else { console.log("Sent", info) }
-                n.status = "SENT"
+                n.status = constants.mailStatus.sent
                 await n.save()
             })
         })

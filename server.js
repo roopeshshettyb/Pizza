@@ -16,4 +16,4 @@ db.once('open', () => { console.log("Connected to DB") })
 require('./routes/notification.route')(app)
 require("./schedulers/emailScheduler");
 
-app.listen(serverConfig.PORT, () => { console.log("Pizza is flying") })
+app.listen(serverConfig.PORT, () => { console.log("Pizza is flying on port", serverConfig.PORT) })
